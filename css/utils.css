@@ -1,0 +1,88 @@
+/* Containers */
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.btn {
+    width: fit-content;
+    height: fit-content;
+    padding: .5em 1em;
+    border-radius: .4em;
+    text-align: center;
+}
+
+.btn-expand {
+    width: 100%;
+    height: fit-content;
+    border-radius: .4em;
+    text-align: center;
+}
+
+.btn:active, .btn-expand:active {
+    outline: none;
+    transform: scale(.8);
+}
+
+.card {
+    border-radius: .5em;
+    background-color: white;
+    box-shadow: 2px 2px 5px grey, -2px -2px 5px grey;
+    padding: .5em;
+    margin: auto;
+    text-align: center;
+}
+
+/* Centralizers */
+.f-centralize-block-xy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-centralize-block-x {
+    display: flex;
+    justify-content: center;
+}
+
+.f-centralize-block-y {
+    display: flex;
+    align-items: center;
+}
+
+/* Layouts */
+.d-flex-r {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-flex-c {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-res {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.grid-2x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+}
+
+.grid-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+}
+
+@media screen and (min-width: 426px) {
+    .container {
+        width: 80%;
+    }
+}

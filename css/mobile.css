@@ -1,0 +1,193 @@
+/* Header */
+header {
+    background-color: transparent;
+    color: white;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--header-index);
+}
+
+.tabs {
+    padding: .5em;
+    text-align: center;
+    width: fit-content;
+    height: 100%;
+    gap: .5em;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    align-items: flex-end;
+}
+
+.tabs > div {
+    cursor: pointer;
+}
+
+.tabs .active {
+    color: grey;
+    font-size: 1rem;
+}
+
+/* Main */
+
+main {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+main .container {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+main .container::-webkit-scrollbar {
+    display: none;
+}
+
+.videos-display-screen {
+    width: 100%;
+    height: 400%;
+}
+
+.video {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.video-container video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.extra-controls {
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: var(--xl-index);
+    background-color: transparent;
+    color: white;
+    gap: 1em;
+    padding: .3em 0;
+    padding-right: 5px;
+}
+
+.controls svg {
+    opacity: 0;
+    display: none;
+    width: 45px;
+    height: 45px;
+}
+
+.controls svg.active {
+    opacity: 1;
+    display: inline-block;
+}
+
+.btns {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    background-color: red;
+    position: absolute;    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: var(--xxl-index);
+}
+
+.btns span {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.video-info {
+    max-width: 75%;
+    height: fit-content;
+    position: absolute;
+    bottom: 85px;
+    left: 0;
+    z-index: var(--xl-index);
+    background-color: white;
+    padding: .3em;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 1.1em;
+}
+
+p.sound-info .icon {
+    width: 25px;
+    height: 25px;
+}
+
+p.sound-info .icon svg {
+    width: 25px;
+    height: 25px;
+}
+
+/* Footer */
+
+footer {
+    background-color: transparent;
+    color: white;
+    width: 100%;
+    height: 75px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: var(--header-index);
+}
+
+.footer-nav {
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-nav li.active a {
+    color: white;
+}
+
+.footer-nav li a {
+    color: lightgrey;
+}
+
+.footer-nav li a svg {
+    width: 35px;
+    height: 35px;
+    fill: lightgrey;
+}   
+
+.footer-nav li.active a svg {
+    fill: white;
+}
+
+.footer-nav li:nth-child(3) a svg {
+    width: 50px;
+    height: 45px;
+}
