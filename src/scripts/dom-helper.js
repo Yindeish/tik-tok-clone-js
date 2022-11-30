@@ -6,13 +6,13 @@ class DomHelper {
     videoBtns = [...document.querySelectorAll('.btns')];
     playBtns = [...document.querySelectorAll('.play')];
     pauseBtns = [...document.querySelectorAll('.pause')];
+    footer = document.querySelector('footer');
 
     tabs = document.querySelector('.tabs');
     followingTab = document.querySelector('.following');
     forYouTab = document.querySelector('.for-you');
 
     getElements() {
-        console.log('get elements in dom helper');
         return {
             mainElement: this.mainElement,
             videosDisplayScreen: this.videosDisplayScreen, 
@@ -23,7 +23,8 @@ class DomHelper {
             pauseBtns: this.pauseBtns,
             tabs: this.tabs,
             followingTab: this.followingTab,
-            forYouTab: this.forYouTab
+            forYouTab: this.forYouTab,
+            footer: this.footer
         }
     }
 }

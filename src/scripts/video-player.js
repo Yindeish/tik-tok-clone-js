@@ -11,31 +11,34 @@ class VideoPlayer {
 
     windowHeight = window.innerHeight;
     canPlayNow = false;
-    heightToPlayVideo = 10;
+    heightToPlayVideo = 100;
 
     getVideos() {
-        console.log('gte videos in video player');
         const videosGetter = new VideosGetter();
         videosGetter.run();
     }
 
-    retrieveElementsAndControlVideos() {
-        console.log('retrieveElements in video player');
-        this.getVideos();
+    getVideosElements() {
         const gottenElements = new DomHelper().getElements();
-        const videosDisplayScreen = gottenElements.videosDisplayScreen;
         const videos = gottenElements.videos;
-
         const followingVideos = new VideosGetter().followingVideos;
+        return {
+            videos, 
+            followingVideos
+        }
+    }
 
-        [...videos].forEach(video => {
+    controlVideos() {
+
+        const { videos, followingVideos } = this.getVideosElements();
+
+        videos.forEach(video => {
             video.addEventListener('click', event => {
                 event.preventDefault();
-                const currentVideoPoster = event.target.poster.slice(event.target.poster.indexOf('assets'));
+                const currentVideoAlt = event.target.dataset.alt;
+                if( followingVideos.find(video => video.videoAlt == currentVideoAlt) ) {
 
-                if( followingVideos.find(video => video.videoPoster == '../'+currentVideoPoster) ) {
-
-                    const currentVideo = followingVideos.find(video => video.videoPoster == '../'+currentVideoPoster);
+                    const currentVideo = followingVideos.find(video => video.videoAlt == currentVideoAlt);
                     currentVideo.isPlaying = !currentVideo.isPlaying;
                     event.target.setAttribute('data-video-is-playing', currentVideo.isPlaying);
                     if( event.target.getAttribute('data-video-is-playing') == 'true') {
@@ -44,16 +47,17 @@ class VideoPlayer {
                     if(event.target.getAttribute('data-video-is-playing') == 'false') {
                         this.pauseVideo(event.target);
                     }
-
-                    return currentVideo;
-                }
+                } 
                 
             })
         })
+
     }
 
     playVideo(video) {
+        this.pauseOtherVideos(video);
         video.play();
+        console.log('playing');
         this.currentVideoPlaying = video;
         this.currentPauseBtn = video.parentElement.nextElementSibling.nextElementSibling.querySelector('.pause');
         this.currentPlayBtn = video.parentElement.nextElementSibling.nextElementSibling.querySelector('.play');
@@ -61,10 +65,14 @@ class VideoPlayer {
         // this.currentPauseBtn.classList.remove('active');
         // this.currentPlayBtn.classList.add('active');
         this.currentPlayBtn.classList.add('fadeIn');
+        // console.dir(video);
+        console.log(this.currentVideoPlaying);
+        return this.currentVideoPlaying;
     }
 
     pauseVideo(video) {
         video.pause();
+        console.log('paused');
         this.currentVideoPaused = video;
         this.currentPlayBtn = video.parentElement.nextElementSibling.nextElementSibling.querySelector('.play');
         this.currentPauseBtn = video.parentElement.nextElementSibling.nextElementSibling.querySelector('.pause');
@@ -72,22 +80,63 @@ class VideoPlayer {
         // this.currentPlayBtn.classList.remove('active');
         // this.currentPauseBtn.classList.add('active');
         this.currentPauseBtn.classList.add('fadeIn');
+        // console.dir(video);
+        console.log(this.currentVideoPaused);
+
+        return this.currentVideoPaused;
     }
+
+    pauseOtherVideos(currentVideo) {
+        const { videos } = this.getVideosElements();
+        videos.forEach(video => {
+
+            if( video != currentVideo ) {
+                if( !(video.paused) ) {
+                    this.pauseVideo(video);
+                } 
+            }
+           
+        })
+    } 
 
     togglePlayAndPauseBtns() {
 
     }
 
-    onScroll(video) {
+    playFirstVideo() {
+        const { videos, followingVideos } = this.getVideosElements();
+        // videos[0].setAttribute('autoplay', true);
+    }
 
-        const videoTop = video.getBoundingClientRect().top;
-        window.addEventListener('scoll', event => {
-            if( this.heightToPlayVideo <= this.windowHeight - videoTop ) {
-                this.canPlayNow = true;
-                this.retrieveElementsAndControlVideos();
-                console.log('can now play current video');
+    stopFirstVideo() {
+        const { videos, followingVideos } = this.getVideosElements();
+        videos[0].removeAttribute('autoplay');
+    }
+
+    onScroll() {   
+        const { videos, followingVideos } = this.getVideosElements();
+       
+        videos.forEach(video => {
+
+            let callback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if( entry.isIntersecting ) {
+                        this.playVideo(entry.target);
+                    } else {
+                        this.pauseVideo(entry.target);
+                    }
+                })
             }
+
+            let observer = new IntersectionObserver(callback);
+            observer.observe(video);
         })
+    }
+
+    run() {
+        this.getVideos();
+        this.controlVideos();
+        this.onScroll();
     }
 
 }

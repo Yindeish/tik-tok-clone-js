@@ -4,59 +4,60 @@ class VideoHelper {
     followingVideos = [
         {
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
-            videoPoster: '../assets/images/portfolio-1.jpg',
+            videoAlt: 'rise and fall',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
                 unlikes: 0,
             },
             isPlaying: false,
-            soundInfo: 'ksdkljiruiou cckje'
+            soundInfo: 'khalid siddique'
         },
         {
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Aleppo__(Vocals_Only___Official_Nasheed_Video)(360p).mp4',
-            videoPoster: '../assets/images/portfolio-2.jpg',
+            videoAlt: 'aleppo',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
                 unlikes: 0,
             },
             isPlaying: false,
-            soundInfo: 'ksdkljiruiou cckje'
+            soundInfo: 'khalid siddique'
         },
         {
             videoSrc: '../assets/videos/Ishaq_Ayubi_-_Allah_Hu_Official_Nasheed_Video(360p).mp4',
-            videoPoster: '../assets/images/portfolio-3.jpg',
+            videoAlt: 'allah hu',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
                 unlikes: 0,
             },
             isPlaying: false,
-            soundInfo: 'ksdkljiruiou cckje'
+            soundInfo: 'ishaq ayubi'
         },
         {
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Road_to_Palestine__(Vocals_Only___Official_Video)(360p).mp4',
-            videoPoster: '../assets/images/portfolio-4.jpg',
+            videoAlt: 'road to palestine',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
                 unlikes: 0,
             },
             isPlaying: false,
-            soundInfo: 'ksdkljiruiou cckje'
+            soundInfo: 'khalid siddique'
         },
     ];
     forYouVideos = [
         {
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Road_to_Palestine__(Vocals_Only___Official_Video)(360p).mp4',
-            videoPoster: '../assets/images/portfolio-5.jpg',
+            videoAlt: 'road to palestine',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
                 unlikes: 0,
             },
             isPlaying: false,
+            soundInfo: 'khalid siddique'
         },
     ];
 

@@ -12,7 +12,7 @@ class VideosGetter {
         /* html */
         videoBlock.innerHTML = `
         <div class="video-container">
-            <video src='${video.videoSrc}' loop data-alt='${video.videoAlt}'></video>
+            <video src='${video.videoSrc}' loop poster='${video.videoPoster}'></video>
         </div>
         <ul class="extra-controls d-flex-c">
             <li class="controls profile-image-btn">
@@ -94,7 +94,7 @@ class VideosGetter {
 
     connectToVideoDisplayScreen(videoBlock) {
         const gottenElements = new  DomHelper().getElements();
-        const { videosDisplayScreen } = gottenElements;
+        const videosDisplayScreen = gottenElements.videosDisplayScreen;
         videosDisplayScreen.append(videoBlock);
     }
 
