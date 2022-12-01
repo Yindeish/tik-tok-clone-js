@@ -8,7 +8,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                unlikes: 0,
+                comments: 0
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
@@ -19,7 +19,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                unlikes: 0,
+                comments: 0
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
@@ -30,7 +30,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                unlikes: 0,
+                comments: 0
             },
             isPlaying: false,
             soundInfo: 'ishaq ayubi'
@@ -41,7 +41,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                unlikes: 0,
+                comments: 0
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
@@ -54,7 +54,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                unlikes: 0,
+                comments: 0
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'

@@ -8,6 +8,7 @@
 
 .fadeIn {
     animation: fadeIn .5s linear forwards;
+    display: inline-block !important;
 }
 
 @keyframes fadeIn {
@@ -23,6 +24,7 @@
 
 .fadeOut {
     animation: fadeOut .5s linear forwards;
+    display: none !important;
 }
 
 @keyframes fadeOut {
