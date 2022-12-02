@@ -34,7 +34,7 @@ class VideosGetter {
                 <svg class="bi bi-chat-dots-fill active message-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
                     <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                 </svg>
-                <div class="message-count count">${video.videoExtraInfos.comments}</div>
+                <div class="message-count count">${video.videoExtraInfos.comments.length}</div>
             </li>
             <li class="controls share">
                 <svg class="active share-btn" xmlns="http://www.w3.org/2000/svg" width="174.166" height="149.931" viewBox="0 0 174.166 149.931">

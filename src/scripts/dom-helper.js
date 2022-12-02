@@ -12,6 +12,7 @@ class DomHelper {
     videoBtns = [...document.querySelectorAll('.btns')];
     playBtns = [...document.querySelectorAll('.play')];
     pauseBtns = [...document.querySelectorAll('.pause')];
+    messageModalElements = [...document.querySelectorAll('.comments-modal')];
     footer = document.querySelector('footer');
 
     tabs = document.querySelector('.tabs');
@@ -36,6 +37,7 @@ class DomHelper {
             tabs: this.tabs,
             followingTab: this.followingTab,
             forYouTab: this.forYouTab,
+            messageModalElements: this.messageModalElements,
             footer: this.footer
         }
     }

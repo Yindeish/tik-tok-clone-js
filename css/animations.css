@@ -6,6 +6,22 @@
     
 }
 
+.moveUp {
+    animation: moveUp .5s linear forwards;
+}
+
+@keyframes moveUp {
+    from {
+        opacity: 0;
+        bottom: -30%;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(50%);
+        bottom: 40%;
+    }
+}
+
 .fadeIn {
     animation: fadeIn .5s linear forwards;
     display: inline-block !important;

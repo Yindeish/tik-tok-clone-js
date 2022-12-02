@@ -1,5 +1,6 @@
 import DomHelper from "./dom-helper.js";
 import VideosGetter from "./video-getters.js";
+import Modal from './modal.js';
 
 class VideoPlayer {
 
@@ -16,7 +17,8 @@ class VideoPlayer {
 
     getVideosElements() {
         const gottenElements = new DomHelper().getElements();
-        const { videos,
+        const { videoBlocks,
+            videos,
             videoBtns,
             videoExtraControls,
             profileImageBtns,
@@ -26,6 +28,7 @@ class VideoPlayer {
             shareBtns } = gottenElements;
         const { followingVideos } = new VideosGetter();
         return {
+            videoBlocks,
             videos, 
             followingVideos,
             videoExtraControls,
@@ -184,6 +187,9 @@ class VideoPlayer {
                         entry.target.addEventListener('click', event => {
                             event.stopImmediatePropagation();
 
+                            const likeSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_001_46810.mp3');
+                            likeSound.play();
+
                             const likeBtnSvg = event.target.closest('svg');
                             const unlikeBtnSvg = likeBtnSvg.nextElementSibling;
 
@@ -226,6 +232,9 @@ class VideoPlayer {
                         entry.target.addEventListener('click', event => {
                             event.stopImmediatePropagation();
 
+                            const unlikeSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_003_40275.mp3');
+                            unlikeSound.play();
+
                             const unlikeBtnSvg = event.target.closest('svg');
                             const likeBtnSvg = unlikeBtnSvg.previousElementSibling;
 
@@ -240,7 +249,7 @@ class VideoPlayer {
                             
                             if( likeBtnSvg.classList.contains('active') ) {
                                 currentVideoLikesHolder.textContent = currentVideoLikes;
-                                
+
                                 // this.sendInfo();
                             } else {
                                 currentVideoLikesHolder.textContent = currentVideoLikes;
@@ -256,6 +265,46 @@ class VideoPlayer {
         })
     }
 
+    getComments() {
+        const { followingVideos } = this.getVideosElements();
+
+    }
+
+    commentOnVideo() {
+        const { messageBtns, followingVideos, videoBlocks } = this.getVideosElements();
+        messageBtns.forEach(messageBtn => {
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if( entry.isIntersecting ) {
+                        entry.target.addEventListener('click', event => {
+                            event.stopImmediatePropagation();
+
+                            const messageBtnSvg = event.target.closest('svg');
+
+                            const currentVideo = messageBtnSvg.parentElement.parentElement.previousElementSibling.querySelector('video');
+                            const currentVideoData = followingVideos.find(video => currentVideo.dataset.alt == video.videoAlt);
+                            let currentVideoComments = currentVideoData.videoExtraInfos.comments;
+
+                            // const currentVideoCommentsHolder = messageBtnSvg.nextElementSibling;
+                            // currentVideoCommentsHolder.textContent = currentVideoComments;
+                            // console.log(currentVideoCommentsHolder);
+
+                            const messageModal  = new Modal(messageBtnSvg);
+                            messageModal.create('message');
+                            // const messageModalElement = messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal');
+                            // messageModalElement.classList.add('moveUp');
+
+                        })
+                    }
+                })
+            })
+
+
+            observer.observe(messageBtn);
+        })
+    }
+
     run() {
         this.getVideos();
         this.playFirstVideo();
@@ -264,6 +313,7 @@ class VideoPlayer {
         this.onScroll();
         this.likeVideo();
         this.unlikeVideo();
+        this.commentOnVideo();
     }
 
 }

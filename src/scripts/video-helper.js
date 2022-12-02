@@ -8,7 +8,20 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                comments: 0
+                comments: [
+                   {
+                    userName: 'LAfred Adler',
+                    message: 'I love this video; It awakened me'
+                   },
+                   {
+                    userName: 'LAfred Adler',
+                    message: 'I love this video; It awakened me'
+                   },
+                   {
+                    userName: 'LAfred Adler',
+                    message: 'I love this video; It awakened me'
+                   },
+                ]
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
@@ -18,8 +31,8 @@ class VideoHelper {
             videoAlt: 'aleppo',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
-                likes: 0,
-                comments: 0
+                likes: 10,
+                comments: []
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
@@ -30,7 +43,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                comments: 0
+                comments: []
             },
             isPlaying: false,
             soundInfo: 'ishaq ayubi'
@@ -41,7 +54,48 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                comments: 0
+                comments: [
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                    {
+                        userName: 'Max Shwarz',
+                        message: 'This video is extremely outstanding; I enjoyed it'
+                    },
+                ]
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
@@ -54,7 +108,7 @@ class VideoHelper {
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
             videoExtraInfos: {
                 likes: 0,
-                comments: 0
+                comments: []
             },
             isPlaying: false,
             soundInfo: 'khalid siddique'
