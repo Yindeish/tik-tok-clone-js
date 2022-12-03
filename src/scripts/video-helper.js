@@ -3,6 +3,11 @@ class VideoHelper {
 
     followingVideos = [
         {
+            creator: {
+                name: 'Kxled',
+                followers: 20000,
+                picture: '../../assets/images/team-2.jpg',
+            },
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
             videoAlt: 'rise and fall',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
@@ -10,16 +15,19 @@ class VideoHelper {
                 likes: 0,
                 comments: [
                    {
-                    userName: 'LAfred Adler',
-                    message: 'I love this video; It awakened me'
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
                    },
                    {
-                    userName: 'LAfred Adler',
-                    message: 'I love this video; It awakened me'
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
                    },
                    {
-                    userName: 'LAfred Adler',
-                    message: 'I love this video; It awakened me'
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
                    },
                 ]
             },
@@ -27,6 +35,11 @@ class VideoHelper {
             soundInfo: 'khalid siddique'
         },
         {
+            creator: {
+                name: 'Kxled',
+                followers: 20000,
+                picture: '../../assets/images/team-2.jpg',
+            },
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Aleppo__(Vocals_Only___Official_Nasheed_Video)(360p).mp4',
             videoAlt: 'aleppo',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
@@ -38,6 +51,11 @@ class VideoHelper {
             soundInfo: 'khalid siddique'
         },
         {
+            creator: {
+                name: 'Ishaq',
+                followers: 30000,
+                picture: '../../assets/images/team-3.jpg',
+            },
             videoSrc: '../assets/videos/Ishaq_Ayubi_-_Allah_Hu_Official_Nasheed_Video(360p).mp4',
             videoAlt: 'allah hu',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
@@ -49,6 +67,11 @@ class VideoHelper {
             soundInfo: 'ishaq ayubi'
         },
         {
+            creator: {
+                name: 'Kxled',
+                followers: 20000,
+                picture: '../../assets/images/team-2.jpg',
+            },
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Road_to_Palestine__(Vocals_Only___Official_Video)(360p).mp4',
             videoAlt: 'road to palestine',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
@@ -57,43 +80,53 @@ class VideoHelper {
                 comments: [
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                     {
                         userName: 'Max Shwarz',
-                        message: 'This video is extremely outstanding; I enjoyed it'
+                        message: 'This video is extremely outstanding; I enjoyed it',
+                        avatar: '../../assets/images/team-4.jpg'
                     },
                 ]
             },
@@ -103,6 +136,11 @@ class VideoHelper {
     ];
     forYouVideos = [
         {
+            creator: {
+                name: 'Kxled',
+                followers: 20000,
+                picture: '../../assets/images/team-2.jpg',
+            },
             videoSrc: '../assets/videos/Khāled_Siddīq_-__Road_to_Palestine__(Vocals_Only___Official_Video)(360p).mp4',
             videoAlt: 'road to palestine',
             videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',

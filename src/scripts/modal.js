@@ -22,9 +22,9 @@ class Modal extends Component {
         };
     }
 
-    create(type, moveLimitHeight = 50) {
+    createModal(type) {
         const { followingVideos } = this.getElements();
-        if ( type == 'message' ) {
+        if ( type == 'message-modal' ) {
 
             if( this.hook ) {
                 const currentVideoBlock = this.hook.parentElement.parentElement.parentElement;
@@ -47,6 +47,14 @@ class Modal extends Component {
                         </span>
                     </header>
                     <ul class="comments-modal-body"></ul>
+                    <div class="add-comment">
+                        <button class="send-comment">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-send" viewBox="0 0 16 16">
+                                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                            </svg>
+                        </button>
+                        <textarea class="message" placeholder="Add your own comment"></textarea>
+                    </div>
                 `
                 );
 
@@ -55,21 +63,26 @@ class Modal extends Component {
                 
                 for ( let comment of currentVideoComments ) {
                      
+                    // Create the modal  li element
                     let commentsModalBody =  document.querySelector('.comments-modal-body');
                     this.createElementsFor(commentsModalBody, 'li', null, null);
 
+                    // Create the li's contents
                     const commentElements = [...commentsModalBody.querySelectorAll('li')];
                     commentElements.forEach(commentElement => {
                         this.createElementsFor(commentElement, null, 'comment', 
                         /*html*/ 
                         `
                             <div class="comment-header">
-                                <span class="user-avatar"></span>
+                                <span class="user-avatar">
+                                    <img src="${comment.avatar}">
+                                </span>
                                 <span class="user-name">${comment.userName}</span>
                             </div>
                             <div class="comment-body">
                                 ${comment.message}
                             </div>
+                            
                         `)
 
                     })
@@ -78,9 +91,11 @@ class Modal extends Component {
                 const pushBtn = currentVideoBlock.querySelector('.push-btn');
                 this.push(pushBtn, commentsModalElement, 'moveUp');
 
+                // Create Modal close btn
                 this.createElementsFor(commentsModalElement, 'span', 'modal-closer');
                 const modalCloser = commentsModalElement.querySelector('.modal-closer');
                 modalCloser.textContent = 'x';
+
                 this.close(modalCloser, commentsModalElement);
                 
             }
@@ -111,7 +126,8 @@ class Modal extends Component {
             btn.addEventListener('click', event => {
                 event.preventDefault();
 
-                // element.style.height = '0px';
+                element.parentElement.removeChild(element);
+
                 // Close cancel btn
                 btn.classList = '';
             })
@@ -120,13 +136,9 @@ class Modal extends Component {
         }
     }
 
-    
-
-    // I don't think i nned to move the modal by myself; Why can't it do itself?
-    // moveModal(elementToMove, moveLimitHeight) {
-    //     console.log(elementToMove);
-    // }
-
+    run(type) {
+        this.createModal(type);
+    }
    
 }
 

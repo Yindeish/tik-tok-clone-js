@@ -1,6 +1,8 @@
 import DomHelper from "./dom-helper.js";
 import VideosGetter from "./video-getters.js";
 import Modal from './modal.js';
+import UserInfo from "./Auth/user-info.js";
+import Component from "./components.js";
 
 class VideoPlayer {
 
@@ -9,6 +11,13 @@ class VideoPlayer {
 
     currentPlayBtn = null;
     currentPauseBtn = null;
+
+    getSignedInUser() {
+        const user = new UserInfo();
+        const userInfos = user.getInfos();
+
+        return userInfos;
+    }
 
     getVideos() {
         const videosGetter = new VideosGetter();
@@ -99,7 +108,9 @@ class VideoPlayer {
     } 
 
     runVideoClickEventsForSomeOtherElements() {
-        const { videoExtraControls } = this.getVideosElements();
+        const { videoExtraControls, videoBtns } = this.getVideosElements();
+
+        // Run video click for extra control as it lays on video and preventing its click event 
         videoExtraControls.forEach(videoExtraControl => {
             
             const observer = new IntersectionObserver((entries, observer) => {
@@ -120,7 +131,29 @@ class VideoPlayer {
             });
 
             observer.observe(videoExtraControl);
+        })
+        // Run video click for play and pause btns as they lay on video and preventing its click event 
 
+        videoBtns.forEach(videoBtn => {
+        
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if( entry.isIntersecting ) {
+                        entry.target.addEventListener('click', () => {
+                            const currentVideoPlaying = entry.target.parentElement.querySelector('video');
+                            if( currentVideoPlaying.paused ) {
+                                this.playVideo(currentVideoPlaying);
+                            } else {
+                                this.pauseVideo(currentVideoPlaying);
+                            }
+                        })
+                    }
+                })
+            }, {
+                threshold: 1
+            });
+
+            observer.observe(videoBtn);
         })
 
     }
@@ -270,6 +303,54 @@ class VideoPlayer {
 
     }
 
+    sendComment(hook) {
+        const { followingVideos } = this.getVideosElements();
+        const { userName, userAvatar } = this.getSignedInUser();
+
+        const currentMessageElement = hook;
+        const hookParent = currentMessageElement.parentElement.parentElement.parentElement;
+        const hookVideo = hookParent.querySelector('video');
+
+        const currentVideoData = followingVideos.find(video => video.videoAlt == hookVideo.dataset.alt)
+        const currentVideoComments = currentVideoData.videoExtraInfos.comments;
+        const message = currentMessageElement.value;
+        currentVideoComments.push({
+            userName,
+            message
+        })
+
+        // Updating the message count
+        const messageCountElement = hookParent.querySelector('.message-count');
+        messageCountElement.textContent = currentVideoComments.length;
+
+        const elementCreator = new Component();
+        const commentsModalBody = hookParent.querySelector('.comments-modal-body');
+        // Create the new comment element
+        elementCreator.createElementsFor(commentsModalBody, 'li', 'comment');
+        // Differentiating the new comment element
+        commentsModalBody.querySelector('.comment:last-child').classList.add('new-comment');
+        const newComment = commentsModalBody.querySelector('.new-comment');
+        // Create the contents for new comment element
+        elementCreator.createElementsFor(newComment, null, null, 
+            /*html*/
+            `
+                <div class="comment-header">
+                    <span class="user-avatar">
+                        <img src="${userAvatar}">
+                    </span>
+                    <span class="user-name">${userName}</span>
+                </div>
+                <div class="comment-body">
+                    ${message}
+                </div>
+                
+            `
+        );
+        
+        currentMessageElement.value = '';
+
+    }
+
     commentOnVideo() {
         const { messageBtns, followingVideos, videoBlocks } = this.getVideosElements();
         messageBtns.forEach(messageBtn => {
@@ -282,18 +363,18 @@ class VideoPlayer {
 
                             const messageBtnSvg = event.target.closest('svg');
 
-                            const currentVideo = messageBtnSvg.parentElement.parentElement.previousElementSibling.querySelector('video');
-                            const currentVideoData = followingVideos.find(video => currentVideo.dataset.alt == video.videoAlt);
-                            let currentVideoComments = currentVideoData.videoExtraInfos.comments;
+                            if( !messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal') ) {
+                                const messageModal  = new Modal(messageBtnSvg);
+                                messageModal.run('message-modal');
 
-                            // const currentVideoCommentsHolder = messageBtnSvg.nextElementSibling;
-                            // currentVideoCommentsHolder.textContent = currentVideoComments;
-                            // console.log(currentVideoCommentsHolder);
+                                const sendCommentBtn = messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal').querySelector('.send-comment');
+                                const messageElement = sendCommentBtn.nextElementSibling;
 
-                            const messageModal  = new Modal(messageBtnSvg);
-                            messageModal.create('message');
-                            // const messageModalElement = messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal');
-                            // messageModalElement.classList.add('moveUp');
+                                sendCommentBtn.addEventListener('click', () => this.sendComment(messageElement));
+
+                            } else {
+                                return ;
+                            }
 
                         })
                     }

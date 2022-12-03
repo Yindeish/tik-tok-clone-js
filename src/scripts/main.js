@@ -5,8 +5,6 @@ import VideoPlayer from './video-player.js';
 class VideoApp {
     static controlVideos() {
         const videosPlayer = new VideoPlayer();
-        // videosPlayer.retrieveElementsAndControlVideos();
-        // videosPlayer.onScroll();
         videosPlayer.run();
     }
 }
