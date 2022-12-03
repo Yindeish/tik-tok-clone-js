@@ -1,3 +1,17 @@
+/* Fonts */
+@import url('../assets/fonts/josefinsans.css');
+@import url('../assets/fonts/roboto.css');
+
+:root {
+    --font-josefin: 'Josefin Sans';
+}
+
+body {
+    font-family: 'Roboto';
+    font-weight: 200;
+    font-size: 12px;
+}
+
 /* Header */
 header {
     background-color: transparent;
@@ -8,6 +22,7 @@ header {
     top: 0;
     left: 0;
     z-index: var(--header-index);
+    font-family: var(--font-josefin);
 }
 
 .tabs {
@@ -221,6 +236,7 @@ p.sound-info .icon svg {
     border-top-right-radius: .5em;
     padding: 2em .5em 1em;
     overflow: auto;
+    font-weight: 500;
 }
 
 .comments-modal::-webkit-scrollbar {
@@ -293,7 +309,7 @@ p.sound-info .icon svg {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid lightgrey;
+    border-bottom: .7px solid black;
 }
 
 .user-avatar {

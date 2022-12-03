@@ -1,17 +1,17 @@
 
-
 class Auth {
 
-    constructor(user) {
+    user;
+
+    createUser(user) {
+
+        this.user = user;
+
         this.userName = user.name;
         this.userAvatar = user.avatar;
         this.userOtherDetails = user.otherDetails;
 
-        this.user = user;
-    }
-
-    createUser() {
-
+        return user;
     }
 
     signIn() {
@@ -21,6 +21,7 @@ class Auth {
     signOut() {
 
     }
+
 }
 
 export default Auth;

@@ -26,27 +26,45 @@ class VideoPlayer {
 
     getVideosElements() {
         const gottenElements = new DomHelper().getElements();
-        const { videoBlocks,
+        const { 
+            videoBlocks,
             videos,
+
             videoBtns,
+            playBtns,
+            pauseBtns,
+
             videoExtraControls,
             profileImageBtns,
+            followBtns,
+            unfollowBtns,
+
             likeBtns,
             unlikeBtns,
             messageBtns,
-            shareBtns } = gottenElements;
-        const { followingVideos } = new VideosGetter();
+            shareBtns
+        } = gottenElements;
+        const { followingVideos, nfollowingVideos } = new VideosGetter();
         return {
             videoBlocks,
             videos, 
-            followingVideos,
+
+            videoBtns,
+            playBtns,
+            pauseBtns,
+            
             videoExtraControls,
             profileImageBtns,
+            followBtns,
+            unfollowBtns,
             likeBtns,
             unlikeBtns,
             messageBtns,
             shareBtns,
             videoBtns,
+
+            followingVideos,
+            nfollowingVideos
         }
     }
 
@@ -361,6 +379,9 @@ class VideoPlayer {
                         entry.target.addEventListener('click', event => {
                             event.stopImmediatePropagation();
 
+                            const messageSound  = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_003_40275.mp3');
+                            messageSound.play();
+
                             const messageBtnSvg = event.target.closest('svg');
 
                             if( !messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal') ) {
@@ -386,6 +407,117 @@ class VideoPlayer {
         })
     }
 
+    followCreator() {
+        const { profileImageBtns, followingVideos } = this.getVideosElements();
+        profileImageBtns.forEach(profileImageBtn => {
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if( entry.isIntersecting ) {
+                        entry.target.addEventListener('click', event => {
+                            event.stopImmediatePropagation();
+
+                            const creatorProfileBtn = event.target.closest('span');
+                            const creatorFollowBtn = creatorProfileBtn.querySelector('.follow-btn');
+                            const creatorUnfollowBtn = creatorProfileBtn.querySelector('.unfollow-btn');
+
+                            creatorFollowBtn.classList.remove('active');
+                            creatorUnfollowBtn.classList.add('active');
+
+                            const currentVideo = creatorProfileBtn.parentElement.parentElement.parentElement.querySelector('video');
+
+                            const currentVideoData = followingVideos.find(video => video.videoAlt == currentVideo.dataset.alt);                           
+                            const currentVideoCreatorFollowers = currentVideoData.creator.followers;
+
+                            if ( creatorFollowBtn.classList.contains('active') ) {
+                                const followSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_006_40278.mp3');
+                                followSound.play();
+                            } else {
+                                const unfollowSound = new Audio('../../assets/audios/zapsplat_cartoon_bubbles_005_26520.mp3');
+                                unfollowSound.play();
+
+                                const { userName, userAvatar, userFollowers } = this.getSignedInUser();
+
+                                currentVideoCreatorFollowers.push({
+                                    name: userName,
+                                    followers: userFollowers,
+                                    picture: userAvatar
+                                });
+
+                                // Updating the creator followers count
+                                const currentCreatorFollowersCount = creatorProfileBtn.parentElement.parentElement.querySelector('.followers-count');
+                                currentCreatorFollowersCount.textContent = currentVideoCreatorFollowers.length;
+
+                                console.log(currentCreatorFollowersCount);
+                                console.log(followingVideos);
+                            }
+
+                            
+                            // if( unlikeBtnSvg.classList.contains('active') ) {
+                            //     currentVideoLikes++;
+                            //     currentVideoData.videoExtraInfos = {...currentVideoData.videoExtraInfos, currentVideoLikes};
+                            //     currentVideoLikesHolder.textContent = currentVideoData.videoExtraInfos.currentVideoLikes;
+
+                            //     // this.sendInfo();
+                            // } else {
+                            //     currentVideoLikesHolder.textContent = currentVideoLikes;
+                            // }
+                        })
+                    }
+                })
+            }, {
+                threshold: 1
+            });
+
+            observer.observe(profileImageBtn);
+        })
+    }
+
+    unfollowCreator() {
+        const { unfollowBtns, followingVideos } = this.getVideosElements();
+        likeBtns.forEach(likeBtn => {
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if( entry.isIntersecting ) {
+                        entry.target.addEventListener('click', event => {
+                            event.stopImmediatePropagation();
+
+                            const unfollowSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_007_40279.mp3');
+                            unfollowSound.play();
+
+                            const likeBtnSvg = event.target.closest('svg');
+                            const unlikeBtnSvg = likeBtnSvg.nextElementSibling;
+
+                            likeBtnSvg.classList.remove('active');
+                            unlikeBtnSvg.classList.add('active');
+
+                            const currentVideo = likeBtnSvg.parentElement.parentElement.previousElementSibling.querySelector('video');
+                            const currentVideoData = followingVideos.find(video => currentVideo.dataset.alt == video.videoAlt);
+                            let currentVideoLikes = currentVideoData.videoExtraInfos.likes;
+                            const currentVideoLikesHolder = unlikeBtnSvg.nextElementSibling;
+                            currentVideoLikesHolder.textContent = currentVideoLikes;
+                            
+                            if( unlikeBtnSvg.classList.contains('active') ) {
+                                currentVideoLikes++;
+                                currentVideoData.videoExtraInfos = {...currentVideoData.videoExtraInfos, currentVideoLikes};
+                                currentVideoLikesHolder.textContent = currentVideoData.videoExtraInfos.currentVideoLikes;
+
+                                // this.sendInfo();
+                            } else {
+                                currentVideoLikesHolder.textContent = currentVideoLikes;
+                            }
+                        })
+                    }
+                })
+            }, {
+                threshold: 1
+            });
+
+            observer.observe(likeBtn);
+        })
+    }
+
     run() {
         this.getVideos();
         this.playFirstVideo();
@@ -395,6 +527,7 @@ class VideoPlayer {
         this.likeVideo();
         this.unlikeVideo();
         this.commentOnVideo();
+        this.followCreator();
     }
 
 }
