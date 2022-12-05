@@ -1,24 +1,17 @@
-import VideoPlayer from './video-player.js';
-// import Tab  from './tabs.js';
-
-
-class VideoApp {
-    static controlVideos() {
-        const videosPlayer = new VideoPlayer();
-        videosPlayer.run();
-    }
-}
-
-VideoApp.controlVideos();
-
+import Tab  from './tabs.js';
 
 class FunctionalitiesApp {
-    static init () {
-        // const tab = new Tab();
-        // const switchTabs = tab.swichTabs();
-        // tab.run(switchTabs);
+
+    static controlTab () {
+
+        const tab = new Tab();
+        tab.run();
+
     }
+
 }
 
-// FunctionalitiesApp.init();
+FunctionalitiesApp.controlTab();
+
+
 

@@ -14,7 +14,7 @@ class VideosGetter {
         /* html */
         videoBlock.innerHTML = `
         <div class="video-container">
-            <video src='${video.videoSrc}' loop data-alt='${video.videoAlt}'></video>
+            <video src='${video.videoSrc}' loop data-alt='${video.videoAlt}' data-is-playing="${video.isPlaying}" data-is-followed="${video.isFollowed}"></video>
         </div>
         <ul class="extra-controls d-flex-c">
             <li class="controls profile-image">
@@ -29,7 +29,7 @@ class VideosGetter {
                         <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
                     </svg>
                 </span>
-                <div class="followers-count">${video.creator.followers.length}</div>
+                <div class="followers-count count">${video.creator.followers.length}</div>
             </li>
             <li class="controls like">
                 <svg class="bi bi-heart-fill active like-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
@@ -96,8 +96,8 @@ class VideosGetter {
         return videoBlock;
     }
 
-    connectVideoInfosToVideoBlock() {
-        for (let video of this.followingVideos ) {
+    connectVideoInfosToVideoBlock(videoType) {
+        for (let video of videoType ) {
             this.connectToVideoDisplayScreen(this.createVideoBlock(video));
         }
     }
@@ -108,8 +108,8 @@ class VideosGetter {
         videosDisplayScreen.append(videoBlock);
     }
 
-    run() {
-        this.connectVideoInfosToVideoBlock();
+    run(videoType) {
+        this.connectVideoInfosToVideoBlock(videoType);
     }
 
 }

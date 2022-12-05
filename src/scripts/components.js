@@ -2,10 +2,16 @@ import DomHelper from "./dom-helper.js";
 
 class Component {
 
-    retrieveElements() {
-        this.getVideos();
-        const gottenElements = DomHelper.gottenElements();
-                
+    getElements() {
+
+        const { videosDisplayScreen , videoBlocks, messageModalElements, tabs} = new DomHelper().getElements();
+
+        return {
+            videosDisplayScreen, 
+            videoBlocks,
+            messageModalElements,
+            tabs
+        };
     }
 
     createElementsFor(parentElement, tagName = null, className = null, innerCode = null) {
@@ -24,11 +30,6 @@ class Component {
         return parentElement;
     }
 
-    
-
-    run(fn) {
-        return fn;
-    }
 }
 
 export default Component;

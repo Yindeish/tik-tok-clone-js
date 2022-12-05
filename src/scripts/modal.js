@@ -1,6 +1,4 @@
 import Component from "./components.js";
-import DomHelper from './dom-helper.js';
-import VideoHelper from "./video-helper.js";
 
 class Modal extends Component {
 
@@ -9,21 +7,8 @@ class Modal extends Component {
         this.hook = hook;
     }
 
-    getElements() {
-        const { videoBlocks, messageModalElements } = new DomHelper().getElements();
-        const { followingVideos } = new VideoHelper();
-        
-
-        return {
-            videoBlocks,
-            messageModalElements,
-
-            followingVideos
-        };
-    }
-
-    createModal(type) {
-        const { followingVideos } = this.getElements();
+    createModal(type, videoType) {
+        this.videoType = videoType;
         if ( type == 'message-modal' ) {
 
             if( this.hook ) {
@@ -58,7 +43,7 @@ class Modal extends Component {
                 `
                 );
 
-                const currentVideoData = followingVideos.find(video => video.videoAlt == currentVideo.dataset.alt );
+                const currentVideoData = this.videoType.find(video => video.videoAlt == currentVideo.dataset.alt );
                 const currentVideoComments = currentVideoData.videoExtraInfos.comments;
                 
                 for ( let comment of currentVideoComments ) {
@@ -136,8 +121,8 @@ class Modal extends Component {
         }
     }
 
-    run(type) {
-        this.createModal(type);
+    run(type, videoType) {
+        this.createModal(type, videoType);
     }
    
 }

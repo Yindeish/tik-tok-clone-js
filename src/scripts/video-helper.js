@@ -3,7 +3,98 @@ import NewVideo from "./new-video.js";
 
 class VideoHelper {
 
-    followingVideos = [
+    // nfollowingVideos = [
+    //     new NewVideo({
+    //         creator: {
+    //             name: 'Kxled',
+    //             followers: [
+    //                 {
+    //                     name: 'Adam',
+    //                     followers: [],
+    //                     picture: '../../assets/images/team-1.jpg'
+    //                 },
+    //                 {
+    //                     name: 'Faruq',
+    //                     followers: [],
+    //                     picture: '../../assets/images/team-1.jpg'
+    //                 },
+    //             ],
+    //             picture: '../../assets/images/team-2.jpg',
+    //         },
+    //         videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+    //         videoAlt: 'rise and fall',
+    //         videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+    //         videoExtraInfos: {
+    //             likes: 0,
+    //             comments: [
+    //                {
+    //                 userName: 'Alfred Adler',
+    //                 message: 'I love this video; It awakened me',
+    //                 avatar: '../../assets/images/team-4.jpg'
+    //                },
+    //                {
+    //                 userName: 'Alfred Adler',
+    //                 message: 'I love this video; It awakened me',
+    //                 avatar: '../../assets/images/team-4.jpg'
+    //                },
+    //                {
+    //                 userName: 'Alfred Adler',
+    //                 message: 'I love this video; It awakened me',
+    //                 avatar: '../../assets/images/team-4.jpg'
+    //                },
+    //             ]
+    //         },
+    //         isPlaying: false,
+            // isFollowed: true,
+    //         soundInfo: 'khalid siddique'
+    //     }),
+    //     new NewVideo({
+    //         creator: {
+    //             name: 'Kxled',
+    //             followers: [
+    //                 {
+    //                     name: 'Adam',
+    //                     followers: [],
+    //                     picture: '../../assets/images/team-1.jpg'
+    //                 },
+    //                 {
+    //                     name: 'Faruq',
+    //                     followers: [],
+    //                     picture: '../../assets/images/team-1.jpg'
+    //                 },
+    //             ],
+    //             picture: '../../assets/images/team-2.jpg',
+    //         },
+    //         videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+    //         videoAlt: 'rise and fall',
+    //         videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+    //         videoExtraInfos: {
+    //             likes: 0,
+    //             comments: [
+    //                {
+    //                 userName: 'Alfred Adler',
+    //                 message: 'I love this video; It awakened me',
+    //                 avatar: '../../assets/images/team-4.jpg'
+    //                },
+    //                {
+    //                 userName: 'Alfred Adler',
+    //                 message: 'I love this video; It awakened me',
+    //                 avatar: '../../assets/images/team-4.jpg'
+    //                },
+    //                {
+    //                 userName: 'Alfred Adler',
+    //                 message: 'I love this video; It awakened me',
+    //                 avatar: '../../assets/images/team-4.jpg'
+    //                },
+    //             ]
+    //         },
+    //         isPlaying: false,
+                // isFollowed: true,
+    //         soundInfo: 'khalid siddique'
+    //     }),
+    // ]
+
+    videos = [
         {
             creator: {
                 name: 'Kxled',
@@ -45,7 +136,272 @@ class VideoHelper {
                 ]
             },
             isPlaying: false,
-            soundInfo: 'khalid siddique'
+            isFollowed: false,
+            soundInfo: 'khalid siddique',
+        },
+        {
+            creator: {
+                name: 'Kxled',
+                followers: [
+                    {
+                        name: 'Adam',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                    {
+                        name: 'Faruq',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                ],
+                picture: '../../assets/images/team-2.jpg',
+            },
+            videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+            videoAlt: 'rise and fall',
+            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+            videoExtraInfos: {
+                likes: 0,
+                comments: [
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                ]
+            },
+            isPlaying: false,
+            isFollowed: true,
+            soundInfo: 'khalid siddique',
+        },
+        {
+            creator: {
+                name: 'Kxled',
+                followers: [
+                    {
+                        name: 'Adam',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                    {
+                        name: 'Faruq',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                ],
+                picture: '../../assets/images/team-2.jpg',
+            },
+            videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+            videoAlt: 'rise and fall',
+            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+            videoExtraInfos: {
+                likes: 0,
+                comments: [
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                ]
+            },
+            isPlaying: false,
+            isFollowed: false,
+            soundInfo: 'khalid siddique',
+        },
+        {
+            creator: {
+                name: 'Kxled',
+                followers: [
+                    {
+                        name: 'Adam',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                    {
+                        name: 'Faruq',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                ],
+                picture: '../../assets/images/team-2.jpg',
+            },
+            videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+            videoAlt: 'rise and fall',
+            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+            videoExtraInfos: {
+                likes: 0,
+                comments: [
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                ]
+            },
+            isPlaying: false,
+            isFollowed: true,
+            soundInfo: 'khalid siddique',
+        },
+        {
+            creator: {
+                name: 'Kxled',
+                followers: [
+                    {
+                        name: 'Adam',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                    {
+                        name: 'Faruq',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                ],
+                picture: '../../assets/images/team-2.jpg',
+            },
+            videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+            videoAlt: 'rise and fall',
+            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+            videoExtraInfos: {
+                likes: 0,
+                comments: [
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                ]
+            },
+            isPlaying: false,
+            isFollowed: false,
+            soundInfo: 'khalid siddique',
+        },
+        {
+            creator: {
+                name: 'Kxled',
+                followers: [
+                    {
+                        name: 'Adam',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                    {
+                        name: 'Faruq',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                ],
+                picture: '../../assets/images/team-2.jpg',
+            },
+            videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+            videoAlt: 'rise and fall',
+            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+            videoExtraInfos: {
+                likes: 0,
+                comments: [
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                ]
+            },
+            isPlaying: false,
+            isFollowed: true,
+            soundInfo: 'khalid siddique',
+        },
+        {
+            creator: {
+                name: 'Kxled',
+                followers: [
+                    {
+                        name: 'Adam',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                    {
+                        name: 'Faruq',
+                        followers: [],
+                        picture: '../../assets/images/team-1.jpg'
+                    },
+                ],
+                picture: '../../assets/images/team-2.jpg',
+            },
+            videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
+            videoAlt: 'rise and fall',
+            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
+            videoExtraInfos: {
+                likes: 0,
+                comments: [
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                   {
+                    userName: 'Alfred Adler',
+                    message: 'I love this video; It awakened me',
+                    avatar: '../../assets/images/team-4.jpg'
+                   },
+                ]
+            },
+            isPlaying: false,
+            isFollowed: false,
+            soundInfo: 'khalid siddique',
         },
         {
             creator: {
@@ -72,6 +428,7 @@ class VideoHelper {
                 comments: []
             },
             isPlaying: false,
+            isFollowed: false,
             soundInfo: 'khalid siddique'
         },
         {
@@ -94,6 +451,8 @@ class VideoHelper {
                 comments: []
             },
             isPlaying: false,
+            isFollowed: true,
+            isFollowed: false,
             soundInfo: 'ishaq ayubi'
         },
         {
@@ -172,128 +531,10 @@ class VideoHelper {
                 ]
             },
             isPlaying: false,
+            isFollowed: false,
             soundInfo: 'khalid siddique'
         },
-    ];
-
-    // nfollowingVideos = [
-    //     new NewVideo({
-    //         creator: {
-    //             name: 'Kxled',
-    //             followers: [
-    //                 {
-    //                     name: 'Adam',
-    //                     followers: [],
-    //                     picture: '../../assets/images/team-1.jpg'
-    //                 },
-    //                 {
-    //                     name: 'Faruq',
-    //                     followers: [],
-    //                     picture: '../../assets/images/team-1.jpg'
-    //                 },
-    //             ],
-    //             picture: '../../assets/images/team-2.jpg',
-    //         },
-    //         videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
-    //         videoAlt: 'rise and fall',
-    //         videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
-    //         videoExtraInfos: {
-    //             likes: 0,
-    //             comments: [
-    //                {
-    //                 userName: 'Alfred Adler',
-    //                 message: 'I love this video; It awakened me',
-    //                 avatar: '../../assets/images/team-4.jpg'
-    //                },
-    //                {
-    //                 userName: 'Alfred Adler',
-    //                 message: 'I love this video; It awakened me',
-    //                 avatar: '../../assets/images/team-4.jpg'
-    //                },
-    //                {
-    //                 userName: 'Alfred Adler',
-    //                 message: 'I love this video; It awakened me',
-    //                 avatar: '../../assets/images/team-4.jpg'
-    //                },
-    //             ]
-    //         },
-    //         isPlaying: false,
-    //         soundInfo: 'khalid siddique'
-    //     }),
-    //     new NewVideo({
-    //         creator: {
-    //             name: 'Kxled',
-    //             followers: [
-    //                 {
-    //                     name: 'Adam',
-    //                     followers: [],
-    //                     picture: '../../assets/images/team-1.jpg'
-    //                 },
-    //                 {
-    //                     name: 'Faruq',
-    //                     followers: [],
-    //                     picture: '../../assets/images/team-1.jpg'
-    //                 },
-    //             ],
-    //             picture: '../../assets/images/team-2.jpg',
-    //         },
-    //         videoSrc: '../assets/videos/Khāled_Siddīq_-__Rise_&_Fall__(Official_Nasheed_Video)(360p).mp4',
-    //         videoAlt: 'rise and fall',
-    //         videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
-    //         videoExtraInfos: {
-    //             likes: 0,
-    //             comments: [
-    //                {
-    //                 userName: 'Alfred Adler',
-    //                 message: 'I love this video; It awakened me',
-    //                 avatar: '../../assets/images/team-4.jpg'
-    //                },
-    //                {
-    //                 userName: 'Alfred Adler',
-    //                 message: 'I love this video; It awakened me',
-    //                 avatar: '../../assets/images/team-4.jpg'
-    //                },
-    //                {
-    //                 userName: 'Alfred Adler',
-    //                 message: 'I love this video; It awakened me',
-    //                 avatar: '../../assets/images/team-4.jpg'
-    //                },
-    //             ]
-    //         },
-    //         isPlaying: false,
-    //         soundInfo: 'khalid siddique'
-    //     }),
-    // ]
-
-    forYouVideos = [
-        {
-            creator: {
-                name: 'Kxled',
-                followers: [
-                    {
-                        name: 'Adam',
-                        followers: [],
-                        picture: '../../assets/images/team-1.jpg'
-                    },
-                    {
-                        name: 'Faruq',
-                        followers: [],
-                        picture: '../../assets/images/team-1.jpg'
-                    },
-                ],
-                picture: '../../assets/images/team-2.jpg',
-            },
-            videoSrc: '../assets/videos/Khāled_Siddīq_-__Road_to_Palestine__(Vocals_Only___Official_Video)(360p).mp4',
-            videoAlt: 'road to palestine',
-            videoInfo: 'lorem ipsum dolor jkfjkj e mnjwdhjj ehji 3ejryu wdjkh',
-            videoExtraInfos: {
-                likes: 0,
-                comments: []
-            },
-            isPlaying: false,
-            soundInfo: 'khalid siddique'
-        },
-    ];
+    ]
 
     async fetchVideos(data = false) {
         return new Promise((resolve, reject) => {
@@ -322,9 +563,7 @@ class VideoHelper {
 
     getVideos() {
         return {
-            followingVideos: this.followingVideos,
-            forYouVideos: this.forYouVideos,
-            nfollowingVideos: this.nfollowingVideos,
+            videos: this.videos
         }
     }
 }

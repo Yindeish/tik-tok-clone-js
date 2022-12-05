@@ -6,6 +6,10 @@ import Component from "./components.js";
 
 class VideoPlayer {
 
+    constructor(videoType) {
+        this.videoType = videoType;
+    }
+
     currentVideoPlaying = null;
     currentVideoPaused = null;
 
@@ -21,7 +25,19 @@ class VideoPlayer {
 
     getVideos() {
         const videosGetter = new VideosGetter();
-        videosGetter.run();
+        videosGetter.run(this.videoType);
+
+        // Checking if an image is followed and updating the UI
+        const { videoBlocks } = this.getVideosElements();
+        videoBlocks.forEach(videoBlock => {
+            if ( videoBlock.querySelector('video').dataset.isFollowed == 'true' ) {
+                videoBlock.querySelector('.follow-btn').classList.remove('active');
+                videoBlock.querySelector('.unfollow-btn').classList.add('active');
+            } else {
+                if( !videoBlock.querySelector('.follow-btn').classList.contains('active') ) videoBlock.querySelector('.follow-btn').classList.add('active');
+                videoBlock.querySelector('.unfollow-btn').classList.remove('active');
+            }
+        })
     }
 
     getVideosElements() {
@@ -44,7 +60,6 @@ class VideoPlayer {
             messageBtns,
             shareBtns
         } = gottenElements;
-        const { followingVideos, nfollowingVideos } = new VideosGetter();
         return {
             videoBlocks,
             videos, 
@@ -62,30 +77,27 @@ class VideoPlayer {
             messageBtns,
             shareBtns,
             videoBtns,
-
-            followingVideos,
-            nfollowingVideos
         }
     }
 
     controlVideos() {
 
-        const { videos, followingVideos } = this.getVideosElements();
+        const { videos } = this.getVideosElements();
 
         videos.forEach(video => {
             video.addEventListener('click', event => {
                 event.preventDefault();
                 const currentVideoAlt = event.target.dataset.alt;
-                if( followingVideos.find(video => video.videoAlt == currentVideoAlt) ) {
+                if( this.videoType.find(video => video.videoAlt == currentVideoAlt) ) {
 
-                    const currentVideo = followingVideos.find(video => video.videoAlt == currentVideoAlt);
+                    const currentVideo = this.videoType.find(video => video.videoAlt == currentVideoAlt);
                     currentVideo.isPlaying = !currentVideo.isPlaying;
                     
-                    event.target.setAttribute('data-video-is-playing', currentVideo.isPlaying);
-                    if( event.target.getAttribute('data-video-is-playing') == 'true') {
+                    event.target.dataset.isPlaying = currentVideo.isPlaying;
+                    if( event.target.dataset.isPlaying == 'true') {
                         this.playVideo(event.target);
                     } 
-                    if(event.target.getAttribute('data-video-is-playing') == 'false') {
+                    if( event.target.dataset.isPlaying == 'false') {
                         this.pauseVideo(event.target);
                     }
 
@@ -229,7 +241,7 @@ class VideoPlayer {
     }
 
     likeVideo() {
-        const { likeBtns, followingVideos } = this.getVideosElements();
+        const { likeBtns } = this.getVideosElements();
         likeBtns.forEach(likeBtn => {
             
             const observer = new IntersectionObserver((entries, observer) => {
@@ -248,7 +260,7 @@ class VideoPlayer {
                             unlikeBtnSvg.classList.add('active');
 
                             const currentVideo = likeBtnSvg.parentElement.parentElement.previousElementSibling.querySelector('video');
-                            const currentVideoData = followingVideos.find(video => currentVideo.dataset.alt == video.videoAlt);
+                            const currentVideoData = this.videoType.find(video => currentVideo.dataset.alt == video.videoAlt);
                             let currentVideoLikes = currentVideoData.videoExtraInfos.likes;
                             const currentVideoLikesHolder = unlikeBtnSvg.nextElementSibling;
                             currentVideoLikesHolder.textContent = currentVideoLikes;
@@ -274,7 +286,7 @@ class VideoPlayer {
     }
 
     unlikeVideo() {
-        const { unlikeBtns, followingVideos } = this.getVideosElements();
+        const { unlikeBtns } = this.getVideosElements();
         unlikeBtns.forEach(unlikeBtn => {
             
             const observer = new IntersectionObserver((entries, observer) => {
@@ -293,7 +305,7 @@ class VideoPlayer {
                             likeBtnSvg.classList.add('active');
 
                             const currentVideo = likeBtnSvg.parentElement.parentElement.previousElementSibling.querySelector('video');
-                            const currentVideoData = followingVideos.find(video => currentVideo.dataset.alt == video.videoAlt);
+                            const currentVideoData = this.videoType.find(video => currentVideo.dataset.alt == video.videoAlt);
                             let currentVideoLikes = currentVideoData.videoExtraInfos.likes;
                             const currentVideoLikesHolder = unlikeBtnSvg.nextElementSibling;
                             currentVideoLikesHolder.textContent = currentVideoLikes;
@@ -317,19 +329,17 @@ class VideoPlayer {
     }
 
     getComments() {
-        const { followingVideos } = this.getVideosElements();
 
     }
 
     sendComment(hook) {
-        const { followingVideos } = this.getVideosElements();
         const { userName, userAvatar } = this.getSignedInUser();
 
         const currentMessageElement = hook;
         const hookParent = currentMessageElement.parentElement.parentElement.parentElement;
         const hookVideo = hookParent.querySelector('video');
 
-        const currentVideoData = followingVideos.find(video => video.videoAlt == hookVideo.dataset.alt)
+        const currentVideoData = this.videoType.find(video => video.videoAlt == hookVideo.dataset.alt)
         const currentVideoComments = currentVideoData.videoExtraInfos.comments;
         const message = currentMessageElement.value;
         currentVideoComments.push({
@@ -370,7 +380,7 @@ class VideoPlayer {
     }
 
     commentOnVideo() {
-        const { messageBtns, followingVideos, videoBlocks } = this.getVideosElements();
+        const { messageBtns } = this.getVideosElements();
         messageBtns.forEach(messageBtn => {
             
             const observer = new IntersectionObserver((entries, observer) => {
@@ -386,7 +396,7 @@ class VideoPlayer {
 
                             if( !messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal') ) {
                                 const messageModal  = new Modal(messageBtnSvg);
-                                messageModal.run('message-modal');
+                                messageModal.run('message-modal', this.videoType);
 
                                 const sendCommentBtn = messageBtnSvg.parentElement.parentElement.parentElement.querySelector('.comments-modal').querySelector('.send-comment');
                                 const messageElement = sendCommentBtn.nextElementSibling;
@@ -407,8 +417,32 @@ class VideoPlayer {
         })
     }
 
-    followCreator() {
-        const { profileImageBtns, followingVideos } = this.getVideosElements();
+    followCreator(hook) {
+        const unfollowSound = new Audio('../../assets/audios/zapsplat_cartoon_bubbles_005_26520.mp3');
+        unfollowSound.play();
+
+        const { userName, userAvatar, userFollowers } = this.getSignedInUser();
+
+        hook.push({
+            name: userName,
+            followers: userFollowers,
+            picture: userAvatar
+        });
+
+        // this.sendInfo(followCount);
+    }
+
+    unfollowCreator(hook) {
+        const followSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_006_40278.mp3');
+        followSound.play();
+
+        hook.pop();
+
+        // this.deleteInfo(followCount);
+    }
+
+    toggleFollow() {
+        const { profileImageBtns } = this.getVideosElements();
         profileImageBtns.forEach(profileImageBtn => {
             
             const observer = new IntersectionObserver((entries, observer) => {
@@ -421,47 +455,24 @@ class VideoPlayer {
                             const creatorFollowBtn = creatorProfileBtn.querySelector('.follow-btn');
                             const creatorUnfollowBtn = creatorProfileBtn.querySelector('.unfollow-btn');
 
-                            creatorFollowBtn.classList.remove('active');
-                            creatorUnfollowBtn.classList.add('active');
+                            creatorFollowBtn.classList.toggle('active');
+                            creatorUnfollowBtn.classList.toggle('active');
 
                             const currentVideo = creatorProfileBtn.parentElement.parentElement.parentElement.querySelector('video');
 
-                            const currentVideoData = followingVideos.find(video => video.videoAlt == currentVideo.dataset.alt);                           
+                            const currentVideoData = this.videoType.find(video => video.videoAlt == currentVideo.dataset.alt);                           
                             const currentVideoCreatorFollowers = currentVideoData.creator.followers;
 
-                            if ( creatorFollowBtn.classList.contains('active') ) {
-                                const followSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_006_40278.mp3');
-                                followSound.play();
-                            } else {
-                                const unfollowSound = new Audio('../../assets/audios/zapsplat_cartoon_bubbles_005_26520.mp3');
-                                unfollowSound.play();
-
-                                const { userName, userAvatar, userFollowers } = this.getSignedInUser();
-
-                                currentVideoCreatorFollowers.push({
-                                    name: userName,
-                                    followers: userFollowers,
-                                    picture: userAvatar
-                                });
-
-                                // Updating the creator followers count
-                                const currentCreatorFollowersCount = creatorProfileBtn.parentElement.parentElement.querySelector('.followers-count');
-                                currentCreatorFollowersCount.textContent = currentVideoCreatorFollowers.length;
-
-                                console.log(currentCreatorFollowersCount);
-                                console.log(followingVideos);
+                            if ( !creatorFollowBtn.classList.contains('active') ) {
+                                this.followCreator(currentVideoCreatorFollowers);
+                            }
+                            else {
+                               this.unfollowCreator(currentVideoCreatorFollowers);
                             }
 
-                            
-                            // if( unlikeBtnSvg.classList.contains('active') ) {
-                            //     currentVideoLikes++;
-                            //     currentVideoData.videoExtraInfos = {...currentVideoData.videoExtraInfos, currentVideoLikes};
-                            //     currentVideoLikesHolder.textContent = currentVideoData.videoExtraInfos.currentVideoLikes;
-
-                            //     // this.sendInfo();
-                            // } else {
-                            //     currentVideoLikesHolder.textContent = currentVideoLikes;
-                            // }
+                            // Updating the creator followers count
+                            const currentCreatorFollowersCount = creatorProfileBtn.parentElement.parentElement.querySelector('.followers-count');
+                            currentCreatorFollowersCount.textContent = currentVideoCreatorFollowers.length;
                         })
                     }
                 })
@@ -470,51 +481,6 @@ class VideoPlayer {
             });
 
             observer.observe(profileImageBtn);
-        })
-    }
-
-    unfollowCreator() {
-        const { unfollowBtns, followingVideos } = this.getVideosElements();
-        likeBtns.forEach(likeBtn => {
-            
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if( entry.isIntersecting ) {
-                        entry.target.addEventListener('click', event => {
-                            event.stopImmediatePropagation();
-
-                            const unfollowSound = new Audio('../../assets/audios/zapsplat_cartoon_bubble_pop_007_40279.mp3');
-                            unfollowSound.play();
-
-                            const likeBtnSvg = event.target.closest('svg');
-                            const unlikeBtnSvg = likeBtnSvg.nextElementSibling;
-
-                            likeBtnSvg.classList.remove('active');
-                            unlikeBtnSvg.classList.add('active');
-
-                            const currentVideo = likeBtnSvg.parentElement.parentElement.previousElementSibling.querySelector('video');
-                            const currentVideoData = followingVideos.find(video => currentVideo.dataset.alt == video.videoAlt);
-                            let currentVideoLikes = currentVideoData.videoExtraInfos.likes;
-                            const currentVideoLikesHolder = unlikeBtnSvg.nextElementSibling;
-                            currentVideoLikesHolder.textContent = currentVideoLikes;
-                            
-                            if( unlikeBtnSvg.classList.contains('active') ) {
-                                currentVideoLikes++;
-                                currentVideoData.videoExtraInfos = {...currentVideoData.videoExtraInfos, currentVideoLikes};
-                                currentVideoLikesHolder.textContent = currentVideoData.videoExtraInfos.currentVideoLikes;
-
-                                // this.sendInfo();
-                            } else {
-                                currentVideoLikesHolder.textContent = currentVideoLikes;
-                            }
-                        })
-                    }
-                })
-            }, {
-                threshold: 1
-            });
-
-            observer.observe(likeBtn);
         })
     }
 
@@ -527,7 +493,7 @@ class VideoPlayer {
         this.likeVideo();
         this.unlikeVideo();
         this.commentOnVideo();
-        this.followCreator();
+        this.toggleFollow();
     }
 
 }
