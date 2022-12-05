@@ -1,4 +1,5 @@
 import Tab from './Components/tabs.js';
+// import VideoRecorder from '../scripts/Components/video-recorder.js';
 
 class FunctionalitiesApp {
 
@@ -13,5 +14,11 @@ class FunctionalitiesApp {
 
 FunctionalitiesApp.controlTab();
 
+// class VideoUpload {
+//     static uploadVideo() {
+//         const videoRecorder = new VideoRecorder();
+//         videoRecorder.run();
+//     }
+// }
 
 

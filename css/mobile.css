@@ -469,35 +469,140 @@ footer {
     width: 100vw;
     height: 100vh;
     background-color: transparent;
-    background-color: red;
     position: relative;
 }
 
-.video-container {
+.video-record button {
+    border: none;
+}
+
+.video-record header {
+    position: fixed;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0em 3em;
+    background-color: transparent;
+}
+
+.video-record header button {
+    display: flex;
+    width: 45px;
+    height: 45px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.video-record button:active {
+    transform: scale(.8);
+}
+
+.video-record header button:nth-child(2) {
+    width: fit-content;
+}
+
+.video-record header button:nth-child(2) svg {
+    width: 25px;
+    height: 25px;
+}
+
+.video-record header button span {
+    color: white;
+    display: inline-block;
+    cursor:pointer
+}
+
+.video-record header button  h3 {
+    font-size: 1.2rem;
+}
+
+.video-record .video-container {
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: green;
+    background-color: transparent;
+    /* background-color: black; */
+    position: relative;
 }
 
-.controls {
-    width: fit-content;
+.video-record video {
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100; */
+    width: 100%;
+    height: 100%;
+    /* display: none; */
+}
+.video-record #recording-video {
+    /* display: block; */
+}
+
+.video-record .controls {
+    width: 75%;
     height: 70px;
     position: fixed;
-    top: 80%;
-    left: 20%;
-    transform: translateX(-50%);
+    margin: auto;
+    top: 89%;
+    left: 12.5%;
     background-color: transparent;
-    background-color: yellow;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.controls button {
+.video-record  .controls button {
     outline: none;
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+}
+
+.video-record  .controls button svg {
+    display: unset;
+    opacity: unset;
+    fill: white;
+}
+
+.video-record  .controls button {
+
+}
+
+.video-record  .controls button:nth-child(2) {
+    width: 70px;
+    height: 70px;
     display: flex;
-    
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 5px solid red;
+    padding: 3px;
+}
+
+.video-record  .controls button:nth-child(2) span {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: red;
+    display: none;
+}
+
+.video-record button:nth-child(2) svg {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.video-record button:nth-child(2) svg.active {
+    display: unset;
+}
+
+.video-record button:nth-child(2) span.active {
+    display: inline-block;
 }

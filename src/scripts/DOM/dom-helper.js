@@ -27,6 +27,11 @@ class DomHelper {
     followingTab = document.querySelector('.following');
     forYouTab = document.querySelector('.for-you');
 
+    // Upload.html
+
+    recordBtn = document.getElementById('record-video');
+    stopBtn = document.getElementById('stop-record');
+
     getElements() {
         return {
             tabs: this.tabs,
@@ -58,6 +63,10 @@ class DomHelper {
             
             followingTab: this.followingTab,
             forYouTab: this.forYouTab,
+
+            // Upload.html
+            recordBtn: this.recordBtn,
+            stopBtn: this.stopBtn
             
         }
     }

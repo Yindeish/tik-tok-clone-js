@@ -4,13 +4,23 @@ class Component {
 
     getElements() {
 
-        const { videosDisplayScreen , videoBlocks, messageModalElements, tabs} = new DomHelper().getElements();
+        const { videosDisplayScreen,
+            videoBlocks,
+            messageModalElements,
+            tabs,
+            // Upload.html
+            recordBtn,
+            stopBtn
+        } = new DomHelper().getElements();
 
         return {
             videosDisplayScreen, 
             videoBlocks,
             messageModalElements,
-            tabs
+            tabs,
+            // Upload.html
+            recordBtn,
+            stopBtn
         };
     }
 
