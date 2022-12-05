@@ -1,6 +1,6 @@
 import Component from './components.js';
-import VideoHelper from './video-helper.js';
-import VideoPlayer from './video-player.js';
+import VideoHelper from '../Videos/video-helper.js';
+import VideoPlayer from '../Videos/video-player.js';
 
 class Tabs extends Component {
     

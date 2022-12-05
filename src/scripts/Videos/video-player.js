@@ -1,8 +1,8 @@
-import DomHelper from "./dom-helper.js";
+import DomHelper from "../DOM/dom-helper.js";
 import VideosGetter from "./video-getters.js";
-import Modal from './modal.js';
-import UserInfo from "./Auth/user-info.js";
-import Component from "./components.js";
+import Modal from '../Components/modal.js';
+import UserInfo from "../Auth/user-info.js";
+import Component from "../Components/components.js";
 
 class VideoPlayer {
 

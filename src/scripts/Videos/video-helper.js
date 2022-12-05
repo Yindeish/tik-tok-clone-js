@@ -1,4 +1,4 @@
-import NewVideo from "./new-video.js";
+import NewVideo from "../Videos/new-video.js";
 
 
 class VideoHelper {

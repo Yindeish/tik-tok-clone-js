@@ -1,4 +1,4 @@
-import Auth from "./Auth/auth.js";
+import Auth from "../Auth/auth.js";
 
 class NewVideo extends Auth {
 

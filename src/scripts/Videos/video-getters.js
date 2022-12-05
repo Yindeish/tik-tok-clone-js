@@ -1,4 +1,4 @@
-import DomHelper from './dom-helper.js';
+import DomHelper from '../DOM/dom-helper.js';
 import VideoHelper from './video-helper.js';
 
 class VideosGetter {

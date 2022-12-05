@@ -1,4 +1,4 @@
-import Tab  from './tabs.js';
+import Tab from './Components/tabs.js';
 
 class FunctionalitiesApp {
 
