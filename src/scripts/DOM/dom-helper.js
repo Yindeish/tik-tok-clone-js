@@ -1,6 +1,8 @@
 class DomHelper {
+    // Tab
     tabs = document.querySelector('.tabs');
 
+    // Modal
     mainElement = document.querySelector('main');
     videosDisplayScreen = document.querySelector('.videos-display-screen');
 
@@ -27,15 +29,23 @@ class DomHelper {
     followingTab = document.querySelector('.following');
     forYouTab = document.querySelector('.for-you');
 
-    // Upload.html
+    // Video Recorder
 
+    recordingVideo = document.getElementById('recording-video');
+    recordedVideo = document.getElementById('recorded-video');
     recordBtn = document.getElementById('record-video');
     stopBtn = document.getElementById('stop-record');
+    closeVideoRecorderBtn = document.querySelector('.close-video-recorder');
+    soundBtn = document.querySelector('.sound-btn');
+    flipBtn = document.querySelector('.flip-btn');
+    effectsBtn = document.querySelector('.effects-btn');
+    uploadBtn = document.querySelector('.upload-btn');
 
     getElements() {
         return {
             tabs: this.tabs,
 
+            // Modal
             mainElement: this.mainElement,
             videosDisplayScreen: this.videosDisplayScreen, 
 
@@ -64,9 +74,16 @@ class DomHelper {
             followingTab: this.followingTab,
             forYouTab: this.forYouTab,
 
-            // Upload.html
+            // Video Recorder
+            recordingVideo: this.recordingVideo,
+            recordedVideo: this.recordedVideo,
             recordBtn: this.recordBtn,
-            stopBtn: this.stopBtn
+            stopBtn: this.stopBtn,
+            closeVideoRecorderBtn: this.closeVideoRecorderBtn,
+            soundBtn: this.soundBtn,
+            flipBtn: this.flipBtn,
+            effectsBtn: this.effectsBtn,
+            uploadBtn: this.uploadBtn
             
         }
     }

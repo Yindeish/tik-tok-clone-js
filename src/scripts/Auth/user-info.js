@@ -13,12 +13,14 @@ class UserInfo extends Auth {
                 }
             }
         );
+        
 
         return {
             userName: this.user.name,
             userAvatar: this.user.avatar,
             userFollowers: this.user.followers,
-            userOtherDetails: this.user.otherDetails
+            userOtherDetails: this.user.otherDetails,
+            user: this.user
         }
     }
    

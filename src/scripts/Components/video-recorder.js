@@ -1,6 +1,10 @@
 import Component from './components.js';
+import UserInfo from '../Auth/user-info.js';
 
 class VideoRecorder extends Component {
+
+    videoSrc;
+    imageIsSelected = false;
 
     startRecording(recordBtn, mediaRecorder) {
        
@@ -16,6 +20,7 @@ class VideoRecorder extends Component {
     }
 
     stopRecording(stopBtn, mediaRecorder, chunks) {
+      const { recordedVideo, recordingVideo } = this.getElements();
 
       stopBtn.onclick = () => {
         mediaRecorder.stop();
@@ -23,24 +28,50 @@ class VideoRecorder extends Component {
         const blob = new Blob(chunks, {
           type: 'video/mp4'
         });
-        const url = URL.createObjectURL(blob);
-        const a  = document.createElement('a');
-        document.body.appendChild(a);
-        a.style = 'display: none';
-        a.href = url;
-        a.download = 'test.mp4'
-        a.click();
-        console.log(mediaRecorder.state);
+        this.videoSrc = URL.createObjectURL(blob);
 
         if ( stopBtn.classList.contains('active')) stopBtn.classList.remove('active');
-          stopBtn.nextElementSibling.classList.add('active');
+        stopBtn.previousElementSibling.classList.add('active');
+        if ( !stopBtn.classList.contains('active') ) {
+          
+          recordingVideo.style = 'display: none';
+          recordedVideo.style = 'display: block';
+          recordedVideo.src  = this.videoSrc;
+          console.log(recordedVideo.src);
+
+        }
+        console.log(this.videoSrc);
       };
+
+    }
+
+    async uploadVideo() {
+      const { user } = new UserInfo().getInfos();
+      
+      const videoInfo = {
+        creator: user,
+        videoSrc: this.videoSrc,
+        videoExtraInfos: {
+          likes: 0,
+          comments: []
+        },
+        isPlaying: false,
+        soundInfo: '9ice'
+      }
+
+      if( this.imageIsSelected ) {
+        return new Promise((resolve, reject) => {
+          console.log('return a new Promise Indeed');
+        })
+      } else {
+        return;
+      }
 
     }
 
     run() {
       
-      const { recordBtn, stopBtn } = this.getElements();
+      const { recordBtn, stopBtn, closeVideoRecorderBtn, uploadBtn } = this.getElements();
       const video = document.querySelector('video');
 
       let chunks = [];
@@ -72,8 +103,19 @@ class VideoRecorder extends Component {
           .catch(err => {
             console.error(`The following error occurred: ${err}`);
           })
+
       }
 
+      uploadBtn.addEventListener('click', () => this.uploadVideo());
+
+      this.closeUploadWindow(closeVideoRecorderBtn);
+
+    }
+
+    closeUploadWindow(closeBtn) {
+      closeBtn.addEventListener('click', event => {
+        history.back();
+      })
     }
 
 
