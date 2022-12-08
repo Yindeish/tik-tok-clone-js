@@ -30,16 +30,23 @@ class DomHelper {
     forYouTab = document.querySelector('.for-you');
 
     // Video Recorder
-
+    videoRecordBlock = document.querySelector('.video-record');
+    recordingVideoControls = document.querySelector('.recording-videos-controls');
+    recordedVideoControls = document.querySelector('.recorded-videos-controls');
     recordingVideo = document.getElementById('recording-video');
     recordedVideo = document.getElementById('recorded-video');
+    logElement = document.querySelector('#log');
     recordBtn = document.getElementById('record-video');
-    stopBtn = document.getElementById('stop-record');
+    stopRecord = document.getElementById('stop-record');
+    playRecord = document.querySelector('.play-record');
     closeVideoRecorderBtn = document.querySelector('.close-video-recorder');
     soundBtn = document.querySelector('.sound-btn');
     flipBtn = document.querySelector('.flip-btn');
     effectsBtn = document.querySelector('.effects-btn');
     uploadBtn = document.querySelector('.upload-btn');
+    markImage = document.querySelector('.mark-image');
+    cancelImage = document.querySelector('.cancel-image');
+
 
     getElements() {
         return {
@@ -75,15 +82,22 @@ class DomHelper {
             forYouTab: this.forYouTab,
 
             // Video Recorder
+            videoRecordBlock: this.videoRecordBlock,
+            recordingVideoControls: this.recordingVideoControls,
+            recordedVideoControls: this.recordedVideoControls,
             recordingVideo: this.recordingVideo,
             recordedVideo: this.recordedVideo,
+            logElement: this.logElement,
             recordBtn: this.recordBtn,
-            stopBtn: this.stopBtn,
+            stopRecord: this.stopRecord,
+            playRecord: this.playRecord,
             closeVideoRecorderBtn: this.closeVideoRecorderBtn,
             soundBtn: this.soundBtn,
             flipBtn: this.flipBtn,
             effectsBtn: this.effectsBtn,
-            uploadBtn: this.uploadBtn
+            uploadBtn: this.uploadBtn,
+            markImage: this.markImage,
+            cancelImage: this.cancelImage
             
         }
     }

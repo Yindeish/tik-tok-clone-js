@@ -523,33 +523,35 @@ footer {
 .video-record .video-container {
     width: 100%;
     height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
     background-color: transparent;
-    /* background-color: black; */
     position: relative;
 }
 
 .video-record video {
-    /* position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 100; */
     width: 100%;
     height: 100%;
-    display: none;
-}
-.video-record #recording-video {
-    display: block;
 }
 
-.video-record .controls {
+.log {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 70%;
+    left: 0;
+    text-align: center;
+    color: black;
+    font-size: 2rem;
+}
+
+.recording-videos-controls, .recorded-video-controls {
     width: 75%;
     height: 70px;
     position: fixed;
     margin: auto;
-    top: 89%;
+    top: 80%;
     left: 12.5%;
     background-color: transparent;
     display: flex;
@@ -557,24 +559,30 @@ footer {
     align-items: center;
 }
 
-.video-record  .controls button {
+.recording-videos-controls button,
+.recorded-video-controls button {
     outline: none;
     width: 45px;
     height: 45px;
     background-color: transparent;
+    color: white;
 }
 
-.video-record  .controls button svg {
+.recording-videos-controls button svg {
     display: unset;
     opacity: unset;
     fill: white;
 }
 
-.video-record  .controls button {
-
+.recording-videos-controls button .play-record {
+    fill: white;   
 }
 
-.video-record  .controls button:nth-child(2) {
+.recording-videos-controls button .play-record path {
+    background-color: white;
+}
+
+.recording-videos-controls button:nth-child(2) {
     width: 70px;
     height: 70px;
     display: flex;
@@ -585,7 +593,7 @@ footer {
     padding: 3px;
 }
 
-.video-record  .controls button:nth-child(2) span {
+.video-record  .recording-videos-controls button:nth-child(2) span {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -593,16 +601,62 @@ footer {
     display: none;
 }
 
-.video-record button:nth-child(2) svg {
+.recording-videos-controls button svg  {
     display: none;
     width: 100%;
     height: 100%;
 }
 
-.video-record button:nth-child(2) svg.active {
+.recording-videos-controls button svg.active {
     display: unset;
 }
 
-.video-record button:nth-child(2) span.active {
+.recording-videos-controls button:nth-child(2) span.active {
     display: inline-block;
 }
+
+/* Notification */
+
+.notification {
+    position: absolute;
+    top: 5px;
+    left: 10%;
+    z-index: calc(var(--header-index) +10);
+    display: block;
+    width: 80%;
+    height: fit-content;
+    padding: 0.7em 0.5em;
+    border-radius: .4em;
+    background-color: white;
+    color: black;
+}
+
+.fade-down {
+    animation: dropDown .35s linear forwards;
+}
+
+@keyframes dropDown {
+    from {
+        top: -10%;
+        opacity: 0;
+    }
+    to {
+        top: 10%;
+        opacity: 1;
+    }
+}
+.fade-up {
+    animation: dropUp .35s linear forwards;
+}
+
+@keyframes dropUp {
+    from {
+        top: 10%;
+        opacity: 1;
+    }
+    to {
+        top: -10%;
+        opacity: 0;
+    }
+}
+

@@ -12,14 +12,21 @@ class Component {
             videoBlocks,
             messageModalElements,
             // Video Recorder
+            videoRecordBlock,
+            recordingVideoControls,
+            recordedVideoControls,
             recordingVideo,
             recordedVideo,
+            logElement,
             recordBtn,
-            stopBtn,
+            stopRecord,
+            playRecord,
             closeVideoRecorderBtn,
             flipBtn,
             effectsBtn,
-            uploadBtn
+            uploadBtn,
+            markImage,
+            cancelImage
         } = new DomHelper().getElements();
 
         return {
@@ -30,14 +37,21 @@ class Component {
             videoBlocks,
             messageModalElements,
             // Video Recorder
+            videoRecordBlock,
+            recordingVideoControls,
+            recordedVideoControls,
             recordingVideo,
             recordedVideo,
+            logElement,
             recordBtn,
-            stopBtn,
+            stopRecord,
+            playRecord,
             closeVideoRecorderBtn,
             flipBtn,
             effectsBtn,
-            uploadBtn
+            uploadBtn,
+            markImage,
+            cancelImage
         };
     }
 

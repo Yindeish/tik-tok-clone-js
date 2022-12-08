@@ -1,49 +1,11 @@
 import Component from './components.js';
 import UserInfo from '../Auth/user-info.js';
+import Notification from './notification.js';
 
 class VideoRecorder extends Component {
 
     videoSrc;
-    imageIsSelected = false;
-
-    startRecording(recordBtn, mediaRecorder) {
-       
-        recordBtn.onclick = () => {
-
-          mediaRecorder.start(10000);
-
-          console.log(mediaRecorder.state);
-
-          if ( recordBtn.classList.contains('active')) recordBtn.classList.remove('active');
-          recordBtn.nextElementSibling.classList.add('active');
-        };
-    }
-
-    stopRecording(stopBtn, mediaRecorder, chunks) {
-      const { recordedVideo, recordingVideo } = this.getElements();
-
-      stopBtn.onclick = () => {
-        mediaRecorder.stop();
-
-        const blob = new Blob(chunks, {
-          type: 'video/mp4'
-        });
-        this.videoSrc = URL.createObjectURL(blob);
-
-        if ( stopBtn.classList.contains('active')) stopBtn.classList.remove('active');
-        stopBtn.previousElementSibling.classList.add('active');
-        if ( !stopBtn.classList.contains('active') ) {
-          
-          recordingVideo.style = 'display: none';
-          recordedVideo.style = 'display: block';
-          recordedVideo.src  = this.videoSrc;
-          console.log(recordedVideo.src);
-
-        }
-        console.log(this.videoSrc);
-      };
-
-    }
+    imageIsReady = false;
 
     async uploadVideo() {
       const { user } = new UserInfo().getInfos();
@@ -59,46 +21,126 @@ class VideoRecorder extends Component {
         soundInfo: '9ice'
       }
 
-      if( this.imageIsSelected ) {
-        return new Promise((resolve, reject) => {
-          console.log('return a new Promise Indeed');
-        })
-      } else {
-        return;
-      }
+      return new Promise((resolve, reject) => {
+        console.log('return a new Promise Indeed');
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST','https://tiktok-clone-js-videos-default-rtdb.firebaseio.com/videos.json');
+
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.responseType = 'json';
+
+        xhr.onload = () => {
+          if ( xhr.status == 200 || xhr.readyState == 4 ) {
+            resolve('Video was successfully uploaded!');
+          } else {
+            reject(xhr.response);
+          }
+        }
+
+        xhr.onerror = () => {
+          reject('You are offline');
+        }
+
+        xhr.onprogress = () => {}
+
+        xhr.send(JSON.stringify(videoInfo));
+      })
+      .then(data => {
+        const notification = new Notification(data);
+        notification.createNotification();
+      })
+      .catch(err => {
+        const notification = new Notification(err);
+        notification.createNotification();
+      })
 
     }
 
     run() {
       
-      const { recordBtn, stopBtn, closeVideoRecorderBtn, uploadBtn } = this.getElements();
-      const video = document.querySelector('video');
-
-      let chunks = [];
+      const { videoRecordBlock, recordingVideo, recordBtn, stopRecord, playRecord, closeVideoRecorderBtn, uploadBtn, cancelImage } = this.getElements();
 
       if (navigator.mediaDevices) {
         const constraints = { audio: true, video: true };
+        let blobsContainer = [];
         
         navigator.mediaDevices
           .getUserMedia(constraints)
           .then(stream => {
 
-            if ( 'srcObject' in video ) {
-              video.srcObject = stream;
+            if ( 'srcObject' in recordingVideo ) {
+              recordingVideo.srcObject = stream;
             } else {
-              video.src = window.URL.createObjectURL(stream)
+              recordingVideo.src = window.URL.createObjectURL(stream)
+              
             }
 
-            const mediaRecorder = new MediaRecorder(stream);
-            
-            this.startRecording(recordBtn, mediaRecorder);
+            let mediaRecorder = new MediaRecorder(stream);
 
-            this.stopRecording(stopBtn, mediaRecorder, chunks); 
+            // Start Recording
+            recordBtn.addEventListener('click', event => {
+              mediaRecorder.start();
+              console.log('mediaRecorder playing');
+  
+              if ( recordBtn.classList.contains('active')) recordBtn.classList.remove('active');
+              recordBtn.nextElementSibling.classList.add('active');
+  
+              mediaRecorder.ondataavailable = event => {
+                blobsContainer.push(event.data);
+              }
+  
+              mediaRecorder.onerror = event => {
+                return new Error(event.error);
+              }
+  
+              mediaRecorder.onstop = () => {
+  
+                let blob = new Blob(blobsContainer);
+  
+                const recordedVideo = document.createElement('video');
+  
+                let src = window.URL.createObjectURL(blob);
+                recordedVideo.innerHTML = 
+                /*html*/ 
+                `
+                <source src="${src}" type="video/mp4">
+                `;
+                playRecord.addEventListener('click', () => recordedVideo.play());
+                const recordedVideoSrc = recordedVideo.querySelector('source').src;
+                this.imageIsReady = true;
+                this.videoSrc = recordedVideoSrc;
+                console.log(this.videoSrc);
+  
+                videoRecordBlock.querySelector('.video-container').removeChild(recordingVideo);
+                videoRecordBlock.querySelector('.video-container').appendChild(recordedVideo);
+              }
 
-            mediaRecorder.ondataavailable = event => {
-              chunks.push(event.data);
-            }
+              // Stop Recording
+              stopRecord.addEventListener('click', event => {
+      
+                recordingVideo.pause();
+                mediaRecorder.stop();
+                console.log('mediaRecorder stopped');
+         
+               if ( stopRecord.classList.contains('active')) stopRecord.classList.remove('active');
+                  playRecord.classList.add('active');
+              })
+  
+              // Cancel Image
+              cancelImage.addEventListener('click', event => {
+                recordingVideo.src = '';
+                const recordedVideo = videoRecordBlock.querySelector('video');
+                videoRecordBlock.querySelector('.video-container').appendChild(recordingVideo);
+                videoRecordBlock.querySelector('.video-container').removeChild(recordedVideo);
+                this.videoSrc = null;
+                this.imageIsReady = false;
 
+                playRecord.classList.remove('active');
+                recordBtn.classList.add('active');
+              })
+
+            })
           })
           .catch(err => {
             console.error(`The following error occurred: ${err}`);
@@ -106,9 +148,9 @@ class VideoRecorder extends Component {
 
       }
 
-      uploadBtn.addEventListener('click', () => this.uploadVideo());
+    uploadBtn.addEventListener('click', () => this.uploadVideo());
 
-      this.closeUploadWindow(closeVideoRecorderBtn);
+    this.closeUploadWindow(closeVideoRecorderBtn);
 
     }
 
@@ -125,8 +167,12 @@ const videoRecorder = new VideoRecorder();
 videoRecorder.run();
 
 
-// The below is the svg to mark the video recorded
-{/* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-check-fill" viewBox="0 0 16 16"> */}
-  {/* <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1.146 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"/> */}
-{/* </svg> */}
+// if ( mediaRecorder.state != 'inactive' || mediaRecorder.state != 'recording' ) {
+//   this.startRecording(recordBtn, mediaRecorder);
+// }
+
+// this.stopRecording(stopRecord, mediaRecorder, chunks, recordedVideo, playRecord); 
+
+// this.playRecordedVideo(playRecord);
+
 
